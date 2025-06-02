@@ -2,10 +2,12 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // SQLite setup
 const db = new sqlite3.Database(':memory:');
@@ -13,8 +15,10 @@ db.serialize(() => {
   db.run("CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT)");
   db.run("INSERT INTO users (username, password) VALUES ('admin', 'admin123')");
   db.run("INSERT INTO users (username, password) VALUES ('user', 'user123')");
-   db.run("INSERT INTO users (username, password) VALUES ('sanjay', 'sanjay123')");
-  // Insecure login route (vulnerable to SQL injection)
+  db.run("INSERT INTO users (username, password) VALUES ('sanjay', 'sanjay123')");
+});
+
+// Insecure login route (vulnerable to SQL injection)
 app.post('/insecure-login', (req, res) => {
   const { username, password } = req.body;
   const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
@@ -24,16 +28,6 @@ app.post('/insecure-login', (req, res) => {
     res.status(401).json({ message: 'Login failed' });
   });
 });
-});
-
-
-app.post('/insecure-login', (req, res) => {
-  const { username, password } = req.body;
-  console.log('Received:', username, password);  // <== Add this
-  const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
-  
-});
-
 
 // Secure login route (parameterized)
 app.post('/secure-login', (req, res) => {
@@ -46,6 +40,11 @@ app.post('/secure-login', (req, res) => {
   });
 });
 
-app.listen(5000, () => {
-  console.log('Backend running on http://localhost:5000');
+app.get('/', (req, res) => {
+  res.send('Server is running!');
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

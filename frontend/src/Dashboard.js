@@ -5,12 +5,13 @@ function Dashboard() {
     <div
       style={{
         minHeight: '100vh',
+        width: '100vw',
         background: 'linear-gradient(120deg, #fff 0%, #232526 100%)',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center', // align to left
+        alignItems: 'center',
         justifyContent: 'center',
-        padding: '48px 0 48px 8vw', // more left padding
+        padding: 0,
         animation: 'fadein 1.2s cubic-bezier(0.4,0,0.2,1)'
       }}
     >
@@ -31,7 +32,7 @@ function Dashboard() {
           }
           .dashboard-title {
             animation: popin 1s cubic-bezier(0.4,0,0.2,1);
-            text-align: left;
+            text-align: center;
           }
           .dashboard-section {
             animation: slideup 1.2s cubic-bezier(0.4,0,0.2,1);
@@ -56,15 +57,15 @@ function Dashboard() {
           color: '#232526',
           fontFamily: "'Montserrat', sans-serif",
           fontWeight: 900,
-          fontSize: 38,
-          marginBottom: 18,
+          fontSize: 42,
+          marginBottom: 24,
           letterSpacing: 1,
-          textAlign: 'left',
-          alignSelf: 'flex-start',
+          textAlign: 'center',
+          alignSelf: 'center',
           animation: 'popin 1s cubic-bezier(0.4,0,0.2,1)',
           display: 'flex',
-          alignItems: 'center', // align text and badge vertically
-          gap: 16 // space between "What is" and the badge
+          alignItems: 'center',
+          gap: 16
         }}
       >
         What is
@@ -73,10 +74,10 @@ function Dashboard() {
           color: '#fff',
           background: '#232526',
           borderRadius: 8,
-          padding: '0 4px',
-          marginLeft: 8,
-          fontSize: 38,
-          lineHeight: '48px',
+          padding: '0 14px',
+          marginLeft: 16,
+          fontSize: 42,
+          lineHeight: '52px',
           animation: 'slideup 1.2s cubic-bezier(0.4,0,0.2,1)'
         }}>
           SQL Injection?
@@ -85,16 +86,17 @@ function Dashboard() {
       <div
         className="dashboard-section"
         style={{
-          maxWidth: 700,
+          width: '90vw',
+          maxWidth: 900,
           background: '#fff',
           color: '#232526',
           borderRadius: 14,
           boxShadow: '0 4px 32px 0 rgba(0,0,0,0.08)',
-          padding: 32,
+          padding: 40,
           fontFamily: "'Montserrat', sans-serif",
-          fontSize: 18,
+          fontSize: 20,
           lineHeight: 1.7,
-          marginBottom: 24,
+          marginBottom: 32,
           animationDelay: '0.2s',
           textAlign: 'left'
         }}
@@ -117,7 +119,7 @@ function Dashboard() {
           borderRadius: 6,
           padding: '10px 14px',
           margin: '14px 0',
-          fontSize: 16
+          fontSize: 18
         }}>
           SELECT * FROM users WHERE username = '{'{user}'}' AND password = '{'{pass}'}';
         </code>
@@ -140,11 +142,10 @@ function Dashboard() {
       <div style={{
         color: '#000',
         fontFamily: "'Montserrat', sans-serif",
-        fontSize: 15,
-        maxWidth: 700,
+        fontSize: 17,
+        maxWidth: 900,
         textAlign: 'left',
         animation: 'fadein 1.5s cubic-bezier(0.4,0,0.2,1)'
-        
       }}>
         Protect your applications by writing secure code, validating all user input, and following security best practices.<br />
         <span style={{color:'#000', fontWeight:600}}>Stay safe!</span>
